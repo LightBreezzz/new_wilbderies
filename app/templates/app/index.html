@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="products">
+    {% for product in products %}
+        <div class="product-card">
+            <div class="product-img">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+            <p class="product-price">{{ product.price }} ₽</p>
+            <div class="product-info">
+                <p class="product-brand">{{ product.brand.name }}</p>
+                /
+                <p class="product-name">{{ product.name }}</p>
+            </div>
+            <p class="product-category">{{ product.category.name }}</p>
+            <button class="product-button" onclick="window.location.href='{% url 'product_details' product.id %}'">Купить</button>
+        </div> 
+    
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
