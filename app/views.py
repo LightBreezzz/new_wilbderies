@@ -1,10 +1,28 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from .models import Product
 
 
 def index(request):
-    products = Product.objects.all()
-    context = {"products": products}
+    # Получаем все товары
+    product_list = Product.objects.all()
+
+    # Номер страницы из GET-параметра (по умолчанию 1)
+    page = request.GET.get('page', 1)
+
+    # Создаём Paginator (10 товаров на странице)
+    paginator = Paginator(product_list, 10)
+
+    try:
+        products_page = paginator.page(page)
+    except PageNotAnInteger:
+        # Если страница не число — показываем первую
+        products_page = paginator.page(1)
+    except EmptyPage:
+        # Если номер страницы больше максимального — показываем последнюю
+        products_page = paginator.page(paginator.num_pages)
+
+    context = {"products": products_page}
     return render(request, "app/index.html", context)
 
 

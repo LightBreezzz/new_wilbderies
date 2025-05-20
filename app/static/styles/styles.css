@@ -49,7 +49,7 @@ nav .nav-links .nav-link a{
 
 .products .product-card {
     background-color: #ffffff;
-    width: 300px;
+    width: 350px;
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -61,7 +61,7 @@ nav .nav-links .nav-link a{
     height: 200px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: #e8a3ff;
+    background-color: #ffff;
 }
 
 .products .product-card img {
@@ -99,7 +99,7 @@ nav .nav-links .nav-link a{
     color: white;
     border: none;
     border-radius: 10px;
-    width: 300px;
+    width: 350px;
     height: 50px;
     font-size: 20px;
     font-weight: 900;
@@ -118,7 +118,7 @@ nav .nav-links .nav-link a{
     gap: 15px;
     padding: 5px;
     overflow-x: auto;
-    background-color: #f9bff9d6;
+    background-color: rgb(255, 255, 255)
     border-bottom: 1px solid #ddd;  
 }
 
@@ -189,4 +189,53 @@ nav .nav-links .nav-link a{
     border-radius: 30px;
     width: 500px;
     height: 40px;
+}
+    
+/* Основные стили для пагинации */
+.pagination {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 8px 14px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease-in-out;
+    background-color: #fff;
+}
+
+.pagination a:hover,
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination .disabled .page-link {
+    color: #6c757d;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.pagination .page-link {
+    line-height: 1.2;
 }

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Product(models.Model):
@@ -8,7 +9,7 @@ class Product(models.Model):
     )
     desc = models.TextField(
         verbose_name="Описание",
-        max_length=600,
+        max_length=3000,
     )
 
     price = models.DecimalField(
@@ -31,6 +32,14 @@ class Product(models.Model):
         verbose_name="Бренд",
         on_delete=models.CASCADE,
     )
+    slug = models.SlugField(
+        "URL",
+        unique=True,
+        blank=True,
+        editable=True,
+        null=True,
+        max_length=250
+    )
 
     class Meta:
         verbose_name = "Товар"
@@ -51,6 +60,14 @@ class Category(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+    )
+    slug = models.SlugField(
+        "URL",
+        unique=True,
+        blank=True,
+        editable=True,
+        null=True,
+        max_length=250
     )
 
     class Meta:
