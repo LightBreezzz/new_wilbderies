@@ -10,10 +10,11 @@
 <div class="cart-container">
     <h2>Корзина</h2>
 
-    {% if cart_items %}
+    {% if cart_items and cart_items|length > 0 %}
         {% for item in cart_items %}
             <div class="cart-item">
                 <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+
                 <div class="cart-info">
                     <div class="cart-title">{{ item.product.name }}</div>
                     <div class="cart-price">{{ item.product.price }} ₽</div>
@@ -21,7 +22,9 @@
 
                 <div class="quantity-controls">
                     <a href="{% url 'update_cart_quantity' item.product.id 'decrease' %}" class="btn-change">–</a>
-                    <span class="quantity">{{ item.quantity }}</span>
+                    <span class="quantity">
+                        {{ item.quantity }}
+                    </span>
                     <a href="{% url 'update_cart_quantity' item.product.id 'increase' %}" class="btn-change">+</a>
                 </div>
 
@@ -34,7 +37,14 @@
             <a href="{% url 'cart_clear' %}" class="btn-clear">Очистить корзину</a>
             <button class="btn-checkout">Оформить заказ</button>
         </div>
-    {% else %}
+        <div class="cart-summary mt-4 text-center">
+            {% if total_quantity %}
+                <p class="mb-0">🛒 В вашей корзине <strong>{{ total_quantity }}</strong> товар(ов)</p>
+            {% else %}
+                <p>Корзина пуста</p>
+            {% endif %}
+        </div>
+        {% else %}
         <p class="empty-cart">Корзина пуста.</p>
     {% endif %}
 </div>

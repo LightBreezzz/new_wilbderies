@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="auth-form-container">
+    <h2 class="text-center mb-4">Создать аккаунт</h2>
+
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-submit w-100">Зарегистрироваться</button>
+    </form>
+
+    <p class="switch-auth mt-3 text-center">
+        Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a>
+    </p>
+</div>
+{% endblock %}

@@ -5,13 +5,27 @@
             <img src="{% static 'img/logoWb.svg' %}" alt="logo">
         </a>
     </div>
+
     <nav> 
         <div class="nav-links">
             <div class="nav-link"><a href="#">Каталог</a></div>
             <div class="nav-link"><a href="#">О нас</a></div>
             <div class="nav-link"><a href="#">Контакты</a></div>
-            <div class="nav-link"><a href="{% url 'cart' %}">🛒 Корзина (<span>{{ request.session.cart|length }}</span>)</a></div>
+            <div class="nav-link"><a href="{% url 'cart' %}">🛒 Корзина</a></div>
+
+        <!-- Блок с входом/регистрацией или именем пользователя -->
+            {% if user.is_authenticated %} 
+                <button class="user-greeting">
+                    <span>Привет, {{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn btn-sm btn-danger">Выход</a>
+                </button>
+            {% else %}
+                <button class="guest-buttons">
+                    <a href="{% url 'login' %}" class="btn btn-sm btn-outline-primary me-2">Войти</a>
+                    /
+                    <a href="{% url 'register' %}" class="btn btn-sm btn-primary">Регистрация</a>
+                </button>
+            {% endif %}
         </div>
     </nav>
-
 </header>

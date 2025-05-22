@@ -9,7 +9,7 @@ body {
     padding-top: 100px;
 }
 header {
-    background: linear-gradient(5deg, #d27b02, #343333);
+    background: linear-gradient(5deg, #02d255, #343333);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,12 +30,78 @@ nav .nav-links {
     gap: 20px;
 }
 
-nav .nav-links .nav-link a{
+nav .nav-links .nav-link a {
     color: white;
     text-decoration: none;
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 10px;
+    font-weight: 400;
     text-transform: uppercase;
+}
+
+
+nav .nav-links {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+}
+
+nav .nav-links .nav-link a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* === Стили для кнопок входа/регистрации и имени пользователя === */
+
+.auth-buttons {
+    margin-left: auto; /* Выравнивание вправо */
+    display: flex;
+    align-items: center;
+}
+
+.guest-buttons,
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.2); /* Прозрачный белый фон */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.guest-buttons:hover,
+.user-greeting:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.guest-buttons a,
+.user-greeting a {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.guest-buttons a:hover,
+.user-greeting a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-sm {
+    font-size: 13px;
+    padding: 5px 10px;
 }
 
 
@@ -241,9 +307,9 @@ nav .nav-links .nav-link a{
 
 .pagination a:hover,
 .pagination .page-item.active .page-link {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+    background-color: #00ffd0;
+    color: rgb(0, 0, 0);
+    border-color: #01995f;
 }
 
 .pagination .disabled .page-link {
@@ -401,4 +467,94 @@ nav .nav-links .nav-link a{
     color: #888;
     text-align: center;
     margin-top: 40px;
+}
+
+.auth-form-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+.auth-form h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #2e7d32;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+.invalid-feedback {
+    color: #e53935;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.btn-submit {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #1b5e20;
+}
+
+.switch-auth {
+    font-size: 13px;
+    color: #555;
+}
+
+.switch-auth a {
+    color: #2e7d32;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.switch-auth a:hover {
+    color: #1b5e20;
+}
+
+.cart-summary {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    font-size: 14px;
+    color: #333;
+    border-radius: 8px;
 }
