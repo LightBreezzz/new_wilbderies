@@ -7,6 +7,7 @@
     <div class="products">
     {% for product in products %}
         <div class="product-card">
+            <div class="buttun-card" onclick="window.location.href='{% url 'product_details' product.slug %}'">
             <div class="product-img">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
             </div>
@@ -17,37 +18,66 @@
                 <p class="product-name">{{ product.name }}</p>
             </div>
             <p class="product-category">{{ product.category.name }}</p>
-            <button class="product-button" onclick="window.location.href='{% url 'product_details' product.id %}'">Купить</button>
+            </div>
+            <button class="product-button" onclick="window.location.href='{% url 'add_to_cart' product.slug %}'">Добавить в корзину</button>
         </div> 
     
     {% endfor %}
     </div>
     <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center mt-2">
-            {% if products.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">&laquo; первая</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ products.previous_page_number }}">предыдущая</a>
-                </li>
-            {% endif %}
-
-            <li class="page-item disabled">
-                <span class="page-link">
-                    Страница {{ products.number }} из {{ products.paginator.num_pages }}
-                </span>
+    <ul class="pagination justify-content-center mt-4">
+        <!-- Кнопка "Назад" -->
+        {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;</a>
             </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo;</span>
+            </li>
+        {% endif %}
 
-            {% if products.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ products.next_page_number }}">следующая</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ products.paginator.num_pages }}">последняя &raquo;</a>
-                </li>
+        <!-- Начало страницы всегда отображается -->
+        <li class="page-item {% if products.number == 1 %}active{% endif %}">
+            <a class="page-link" href="?page=1">1</a>
+        </li>
+
+        <!-- Отображение многоточия между первой и текущими страницами -->
+        <!-- {% if products.paginator.num_pages > 5 and products.number > 3 %}
+            <li class="page-item disabled">
+                <span class="page-link">…</span>
+            </li>
+        {% endif %} -->
+
+        <!-- Страницы вокруг текущей -->
+        {% for i in products.paginator.page_range %}
+            {% if i > 1 and i < products.paginator.num_pages %}
+                {% if i >= products.number|add:'-2' and i <= products.number|add:'2' %}
+                    <li class="page-item {% if products.number == i %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endif %}
             {% endif %}
-        </ul>
+        {% endfor %}
+
+        <!-- Конец страницы всегда отображается -->
+        {% if products.paginator.num_pages > 1 %}
+            <li class="page-item {% if products.number == products.paginator.num_pages %}active{% endif %}">
+                <a class="page-link" href="?page={{ products.paginator.num_pages }}">{{ products.paginator.num_pages }}</a>
+            </li>
+        {% endif %}
+
+        <!-- Кнопка "Вперед" -->
+        {% if products.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.next_page_number }}">&raquo;</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&raquo;</span>
+            </li>
+        {% endif %}
+    </ul>
     </nav>
 </div>
 {% endblock %}

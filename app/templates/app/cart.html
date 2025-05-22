@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Корзина{% endblock %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    <h2>Корзина</h2>
+
+    {% if cart_items %}
+        {% for item in cart_items %}
+            <div class="cart-item">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                <div class="cart-info">
+                    <div class="cart-title">{{ item.product.name }}</div>
+                    <div class="cart-price">{{ item.product.price }} ₽</div>
+                </div>
+
+                <div class="quantity-controls">
+                    <a href="{% url 'update_cart_quantity' item.product.id 'decrease' %}" class="btn-change">–</a>
+                    <span class="quantity">{{ item.quantity }}</span>
+                    <a href="{% url 'update_cart_quantity' item.product.id 'increase' %}" class="btn-change">+</a>
+                </div>
+
+                <a href="{% url 'remove_from_cart' item.product.id %}" class="btn-remove">Удалить</a>
+            </div>
+        {% endfor %}
+
+        <div class="cart-footer">
+            <p class="total-price">Итого: {{ total_price|floatformat:2 }} ₽</p>
+            <a href="{% url 'cart_clear' %}" class="btn-clear">Очистить корзину</a>
+            <button class="btn-checkout">Оформить заказ</button>
+        </div>
+    {% else %}
+        <p class="empty-cart">Корзина пуста.</p>
+    {% endif %}
+</div>
+{% endblock %}

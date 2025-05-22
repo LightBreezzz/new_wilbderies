@@ -10,6 +10,7 @@
             <div class="nav-link"><a href="#">Каталог</a></div>
             <div class="nav-link"><a href="#">О нас</a></div>
             <div class="nav-link"><a href="#">Контакты</a></div>
+            <div class="nav-link"><a href="{% url 'cart' %}">🛒 Корзина (<span>{{ request.session.cart|length }}</span>)</a></div>
         </div>
     </nav>
 
